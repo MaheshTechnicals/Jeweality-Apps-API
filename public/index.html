@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>More Apps by JEWEALITY</title>
+  <meta name="description" content="All apps by JEWEALITY on Google Play." />
+  <style>
+    /* U6: theme via CSS variables, auto light/dark */
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #15171a;
+      --muted: #5c6370;
+      --border: #e3e6ea;
+      --accent: #0b8043;
+      --accent-text: #ffffff;
+      --skeleton: #e9ecef;
+      --radius: 14px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1114;
+        --card: #1a1d21;
+        --text: #eceef1;
+        --muted: #9aa1ab;
+        --border: #2a2e34;
+        --accent: #34a853;
+        --accent-text: #0f1114;
+        --skeleton: #262a30;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 1280px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1 { font-size: 1.6rem; margin: 0 0 4px; }
+    .sub { color: var(--muted); margin: 0 0 24px; font-size: .95rem; }
+
+    /* U2: responsive grid 1 / 2 / 3 / 4 columns */
+    .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 600px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px)  { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+    .head { display: flex; gap: 12px; align-items: center; }
+    .icon { width: 56px; height: 56px; border-radius: 12px; flex: none; background: var(--skeleton); object-fit: cover; }
+    .name { font-weight: 600; font-size: 1rem; margin: 0; overflow-wrap: anywhere; }
+    .meta { color: var(--muted); font-size: .8rem; margin: 0; }
+    .short { margin: 0; color: var(--text); font-size: .92rem; }
+    details { font-size: .88rem; color: var(--muted); }
+    summary { cursor: pointer; color: var(--accent); font-weight: 500; }
+    .long { white-space: pre-line; margin: 8px 0 0; max-height: 260px; overflow: auto; overflow-wrap: anywhere; }
+    .install {
+      margin-top: auto;
+      display: inline-block;
+      text-align: center;
+      background: var(--accent);
+      color: var(--accent-text);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+    .install:hover { filter: brightness(1.08); }
+    .install:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* U5: skeleton / states */
+    .sk { background: var(--skeleton); border-radius: 6px; animation: pulse 1.2s ease-in-out infinite; }
+    .sk-line { height: 12px; margin: 6px 0; }
+    .sk-btn { height: 40px; border-radius: 10px; margin-top: auto; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    @media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
+    .state { text-align: center; color: var(--muted); padding: 48px 16px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>More Apps</h1>
+    <p class="sub" id="sub">Apps by JEWEALITY on Google Play</p>
+    <div class="grid" id="grid" aria-live="polite" aria-busy="true"></div>
+    <p class="state" id="error" hidden>Could not load apps. Please try again later.</p>
+    <p class="state" id="empty" hidden>No apps found.</p>
+  </main>
+
+  <script>
+    // Change this to your full URL when using from another site/app.
+    const API = "apps.json";
+
+    const grid = document.getElementById("grid");
+
+    // Small helper: create element with class + textContent (U7: never innerHTML).
+    function el(tag, cls, text) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
+
+    // U5: loading skeleton cards
+    function showSkeleton(n = 8) {
+      for (let i = 0; i < n; i++) {
+        const c = el("div", "card");
+        c.setAttribute("aria-hidden", "true");
+        const head = el("div", "head");
+        head.append(el("div", "icon sk"));
+        const t = el("div");
+        t.style.flex = "1";
+        const l1 = el("div", "sk sk-line"); l1.style.width = "70%";
+        const l2 = el("div", "sk sk-line"); l2.style.width = "40%";
+        t.append(l1, l2);
+        head.append(t);
+        c.append(head, el("div", "sk sk-line"), el("div", "sk sk-line"), el("div", "sk sk-btn"));
+        grid.append(c);
+      }
+    }
+
+    // U3 + U4: one app card
+    function card(app) {
+      const c = el("article", "card");
+
+      const head = el("div", "head");
+      const img = el("img", "icon");
+      img.src = app.icon || "";
+      img.alt = `${app.name} icon`;
+      img.loading = "lazy";
+      img.width = 56;
+      img.height = 56;
+      img.referrerPolicy = "no-referrer";
+      const titles = el("div");
+      titles.style.minWidth = "0";
+      titles.append(el("h2", "name", app.name));
+      const meta = [app.score ? `★ ${app.score.toFixed(1)}` : "", app.installs].filter(Boolean).join(" · ");
+      if (meta) titles.append(el("p", "meta", meta));
+      head.append(img, titles);
+      c.append(head);
+
+      if (app.shortDescription) c.append(el("p", "short", app.shortDescription));
+
+      if (app.description) {
+        const d = el("details");
+        d.append(el("summary", null, "Read more"), el("p", "long", app.description));
+        c.append(d);
+      }
+
+      const a = el("a", "install", "Install");
+      a.href = app.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.setAttribute("aria-label", `Install ${app.name} from Google Play`);
+      c.append(a);
+      return c;
+    }
+
+    async function load() {
+      showSkeleton();
+      try {
+        const res = await fetch(API, { cache: "no-cache" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const apps = Array.isArray(data.apps) ? data.apps : [];
+        grid.replaceChildren(...apps.map(card));
+        if (!apps.length) document.getElementById("empty").hidden = false;
+        if (data.updatedAt) {
+          document.getElementById("sub").textContent =
+            `${apps.length} apps by ${data.developer || "JEWEALITY"} · updated ${new Date(data.updatedAt).toLocaleDateString()}`;
+        }
+      } catch (err) {
+        console.error(err);
+        grid.replaceChildren();
+        document.getElementById("error").hidden = false;
+      } finally {
+        grid.setAttribute("aria-busy", "false");
+      }
+    }
+
+    load();
+  </script>
+</body>
+</html>

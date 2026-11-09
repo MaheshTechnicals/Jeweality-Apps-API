@@ -1,0 +1,45 @@
+name: Update apps data
+
+on:
+  schedule:
+    - cron: "30 21 * * *" # S1: daily 21:30 UTC = 3:00 AM IST
+  workflow_dispatch: # S2: manual run
+
+permissions:
+  contents: write # S5
+
+concurrency:
+  group: update-apps
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Exits non-zero (workflow fails) if Google fails; old apps.json stays untouched.
+      - run: node fetch-apps.js
+        env:
+          DEV_ID: JEWEALITY
+
+      # S4: stage only apps.json; commit + push only if it changed.
+      - name: Commit if changed
+        run: |
+          git add public/apps.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "apps-bot"
+          git config user.email "apps-bot@users.noreply.github.com"
+          git commit -m "chore: update apps.json"
+          git push

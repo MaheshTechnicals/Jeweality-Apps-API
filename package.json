@@ -1,0 +1,16 @@
+{
+  "name": "jeweality-apps-api",
+  "version": "1.0.0",
+  "description": "Free, serverless, read-only JSON API of all JEWEALITY apps on Google Play.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "fetch": "node fetch-apps.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "google-play-scraper": "^10.0.1"
+  }
+}
