@@ -14,14 +14,14 @@ concurrency:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # pinned so the ubuntu-latest -> 26 migration can't surprise us
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7 # node24 runtime
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7 # node24 runtime
         with:
-          node-version: 20
+          node-version: 24 # Node 20 is EOL; 24 is current LTS
           cache: npm
 
       - run: npm ci
@@ -33,6 +33,7 @@ jobs:
 
       # S4: stage only apps.json; commit + push only if it changed.
       - name: Commit if changed
+        id: commit
         run: |
           git add public/apps.json
           if git diff --cached --quiet; then
@@ -43,3 +44,11 @@ jobs:
           git config user.email "apps-bot@users.noreply.github.com"
           git commit -m "chore: update apps.json"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # jsDelivr caches @main for up to 12h; purge so the CDN URL serves new data right away.
+      - name: Purge jsDelivr cache
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          sleep 10
+          curl -fsS "https://purge.jsdelivr.net/gh/${{ github.repository }}@main/public/apps.json" || echo "Purge failed (non-fatal)"
