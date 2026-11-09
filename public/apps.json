@@ -1,7 +1,7 @@
 {
   "developer": "JEWEALITY",
   "count": 47,
-  "updatedAt": "2026-11-09T07:20:36.836Z",
+  "updatedAt": "2026-11-09T07:25:23.529Z",
   "apps": [
     {
       "name": "JXLify: Image to JXL Converter",
@@ -26,18 +26,6 @@
       "installs": "10+",
       "version": "1.0.0",
       "updated": 1793197130000
-    },
-    {
-      "name": "VNC Viewer: Remote Desktop",
-      "package": "com.jeweality.vncviewer",
-      "url": "https://play.google.com/store/apps/details?id=com.jeweality.vncviewer&hl=en&gl=us",
-      "icon": "https://play-lh.googleusercontent.com/BOxBmARPjk8wCwluvKgG8OU8GmhoLuoKcm5huitqVP09oDB-IH1HDIFjcafKOWeBZtqS3wktP2s8DYi1Bz6rrA",
-      "shortDescription": "Control Windows & Linux desktops remotely with VNC, SSH and smooth touch.",
-      "description": "Turn your Android phone or tablet into a practical VNC remote desktop viewer. Connect to a compatible VNC server and view or control your Windows, Linux, macOS and other desktop systems from your device.\n\nVNC Viewer: Remote Desktop is built for direct VNC connections, with useful tools for everyday remote access, troubleshooting and managing computers.\n\nREMOTE DESKTOP CONNECTIONS\n\n• Connect using a computer name, IP address and VNC port.\n• Save multiple computer connections for quick access.\n• Organize devices with favorites, folders and tags.\n• Search saved connections by name or address.\n• Reopen recent sessions and view connection history.\n• Discover supported devices on your local network.\n• Use Wake-on-LAN when your network and computer support it.\n\nCONTROL YOUR DESKTOP\n\n• View the remote screen with responsive framebuffer updates.\n• Choose Trackpad or Direct Touch input to control the pointer.\n• Use mouse actions including left, right and middle click, scrolling and dragging.\n• Type with the on-screen keyboard or a connected physical keyboard.\n• Access useful keys and shortcuts, including Ctrl, Alt, Shift and Ctrl+Alt+Del.\n• Adjust zoom, pan, Fit, Fill and 100% viewing modes.\n• Lock screen rotation or refresh the remote display.\n• Use view-only mode when you only need to watch the screen.\n\nSECURE CONNECTION OPTIONS\n\n• Connect to VNC servers that support standard VNC authentication.\n• Use supported TLS/VeNCrypt security options where available.\n• Route a VNC connection through an SSH tunnel when configured.\n• Protect saved connection credentials with Android Keystore encryption.\n• Use biometric unlock for supported protected credentials.\n\nSESSION TOOLS\n\n• Capture screenshots of your remote desktop.\n• Record sessions when recording is enabled.\n• Send and receive clipboard content where supported by the VNC server.\n• Choose display quality presets and adjust the frame rate.\n• Check session information and connection performance.\n• Reconnect after temporary network interruptions when supported.\n\nGET STARTED\n\nInstall and configure a VNC server on the computer you want to access.\n\nMake sure the computer is reachable from your Android device. For connections over the internet, configure a secure route such as an SSH tunnel and the required network access.\n\nOpen VNC Viewer and add a connection using the computer's IP address or hostname and VNC port.\n\nEnter the VNC password, connect and start controlling your desktop.\n\nMADE FOR VNC\n\nThis app is a VNC client, not a remote-hosting service. A compatible VNC server must be installed and running on the computer you want to access. Available features and security options depend on the VNC server, its configuration and your network.\n\nWhether you are accessing a Windows workstation, managing a Linux desktop, checking a server or connecting to another VNC-compatible computer, VNC Viewer puts remote screen access and control in the palm of your hand.\n\nNote: Network access, server configuration and firewall rules may be required. Always use trusted connections and protect your VNC credentials.",
-      "score": null,
-      "installs": "10+",
-      "version": "1.0",
-      "updated": 1793526701000
     },
     {
       "name": "Altitude And Speed Meter",
@@ -86,6 +74,18 @@
       "installs": "10+",
       "version": "1.1",
       "updated": 1790257937000
+    },
+    {
+      "name": "VNC Viewer: Remote Desktop",
+      "package": "com.jeweality.vncviewer",
+      "url": "https://play.google.com/store/apps/details?id=com.jeweality.vncviewer&hl=en&gl=us",
+      "icon": "https://play-lh.googleusercontent.com/BOxBmARPjk8wCwluvKgG8OU8GmhoLuoKcm5huitqVP09oDB-IH1HDIFjcafKOWeBZtqS3wktP2s8DYi1Bz6rrA",
+      "shortDescription": "Control Windows & Linux desktops remotely with VNC, SSH and smooth touch.",
+      "description": "Turn your Android phone or tablet into a practical VNC remote desktop viewer. Connect to a compatible VNC server and view or control your Windows, Linux, macOS and other desktop systems from your device.\n\nVNC Viewer: Remote Desktop is built for direct VNC connections, with useful tools for everyday remote access, troubleshooting and managing computers.\n\nREMOTE DESKTOP CONNECTIONS\n\n• Connect using a computer name, IP address and VNC port.\n• Save multiple computer connections for quick access.\n• Organize devices with favorites, folders and tags.\n• Search saved connections by name or address.\n• Reopen recent sessions and view connection history.\n• Discover supported devices on your local network.\n• Use Wake-on-LAN when your network and computer support it.\n\nCONTROL YOUR DESKTOP\n\n• View the remote screen with responsive framebuffer updates.\n• Choose Trackpad or Direct Touch input to control the pointer.\n• Use mouse actions including left, right and middle click, scrolling and dragging.\n• Type with the on-screen keyboard or a connected physical keyboard.\n• Access useful keys and shortcuts, including Ctrl, Alt, Shift and Ctrl+Alt+Del.\n• Adjust zoom, pan, Fit, Fill and 100% viewing modes.\n• Lock screen rotation or refresh the remote display.\n• Use view-only mode when you only need to watch the screen.\n\nSECURE CONNECTION OPTIONS\n\n• Connect to VNC servers that support standard VNC authentication.\n• Use supported TLS/VeNCrypt security options where available.\n• Route a VNC connection through an SSH tunnel when configured.\n• Protect saved connection credentials with Android Keystore encryption.\n• Use biometric unlock for supported protected credentials.\n\nSESSION TOOLS\n\n• Capture screenshots of your remote desktop.\n• Record sessions when recording is enabled.\n• Send and receive clipboard content where supported by the VNC server.\n• Choose display quality presets and adjust the frame rate.\n• Check session information and connection performance.\n• Reconnect after temporary network interruptions when supported.\n\nGET STARTED\n\nInstall and configure a VNC server on the computer you want to access.\n\nMake sure the computer is reachable from your Android device. For connections over the internet, configure a secure route such as an SSH tunnel and the required network access.\n\nOpen VNC Viewer and add a connection using the computer's IP address or hostname and VNC port.\n\nEnter the VNC password, connect and start controlling your desktop.\n\nMADE FOR VNC\n\nThis app is a VNC client, not a remote-hosting service. A compatible VNC server must be installed and running on the computer you want to access. Available features and security options depend on the VNC server, its configuration and your network.\n\nWhether you are accessing a Windows workstation, managing a Linux desktop, checking a server or connecting to another VNC-compatible computer, VNC Viewer puts remote screen access and control in the palm of your hand.\n\nNote: Network access, server configuration and firewall rules may be required. Always use trusted connections and protect your VNC credentials.",
+      "score": null,
+      "installs": "10+",
+      "version": "1.0",
+      "updated": 1793526701000
     },
     {
       "name": "Cup & Gram: Kitchen Converter",
